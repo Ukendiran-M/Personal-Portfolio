@@ -3,7 +3,9 @@ const nodemailer = require('nodemailer');
 const cors = require('cors');
 
 const app = express();
-app.use(cors());
+app.use(cors({
+  origin: 'https://ukendiran.netlify.app/', // Replace with your real Netlify domain
+}));
 app.use(express.json());
 
 app.post('/send', async (req, res) => {
