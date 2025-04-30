@@ -31,7 +31,7 @@ const ContactSection: React.FC = () => {
     setError(null);
   
     try {
-      const res = await fetch('http://localhost:5000/send', {
+      const res = await fetch('https://personal-portfolio-hzwa.onrender.com', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

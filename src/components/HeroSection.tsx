@@ -21,7 +21,7 @@ const HeroSection: React.FC = () => {
   }, []);
 
   return (
-    <section id="home" className="relative min-h-screen flex items-center bg-black text-white pt-20">
+    <section id="home" className="relative min-h-screen flex items-center bg-black text-white pt-20 pb-28">
       <div className="absolute inset-0 bg-gradient-to-br from-black via-gray-900 to-black opacity-80"></div>
       
       {/* Animated background particles */}
@@ -34,7 +34,7 @@ const HeroSection: React.FC = () => {
       <div className="container mx-auto px-4 z-10">
         <div className="max-w-6xl mx-auto flex flex-col-reverse md:flex-row items-center gap-12">
           <div className="flex-1">
-            <p className="text-red-500 font-semibold mb-4">Hello, my name is</p>
+            <p className="text-red-500 font-semibold mb-4">Here's the Software Expertise,</p>
             <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold mb-2 text-red-500">
               UKENDIRAN
             </h1>
@@ -83,7 +83,7 @@ const HeroSection: React.FC = () => {
               <div className="relative z-10 rounded-lg overflow-hidden">
                 <img 
                   src={profilePic} alt="My Profile" 
-                  className="w-full h-auto transition-all duration-300 group-hover:scale-105 opacity-60"
+                  className="w-full h-auto transition-all duration-300 group-hover:scale-105 opacity-65"
                 />
                 <div className="absolute inset-0 bg-opacity-20 transition-opacity duration-300 opacity-0 group-hover:opacity-100"></div>
               </div>
