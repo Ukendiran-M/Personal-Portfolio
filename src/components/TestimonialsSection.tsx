@@ -44,7 +44,7 @@ const TestimonialsSection: React.FC = () => {
       <div className="container mx-auto px-4">
         <div className="max-w-5xl mx-auto">
           <h2 className="text-3xl md:text-4xl font-bold mb-2">
-            <span className="text-red-500">06.</span> Testimonials
+            <span className="text-red-500">05.</span> Testimonials
           </h2>
           <div className="w-24 h-1 bg-red-500 mb-12"></div>
 
