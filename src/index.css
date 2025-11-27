@@ -61,3 +61,55 @@ body {
 .animate-blob {
   animation: blob 7s infinite;
 }
+
+/* StarBorder strips (plain CSS animation) */
+.star-border-strip {
+  position: absolute;
+  left: -50%;
+  width: 200%;
+  height: 60%;
+  opacity: 0.9;
+  border-radius: 9999px;
+  pointer-events: none;
+  z-index: 0;
+  mix-blend-mode: screen;
+  filter: blur(4px);
+}
+
+.star-border-strip-bottom {
+  bottom: -2px;
+  animation-name: star-movement-bottom;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+  animation-direction: alternate;
+}
+
+.star-border-strip-top {
+  top: -2px;
+  animation-name: star-movement-top;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+  animation-direction: alternate;
+}
+
+@keyframes star-movement-bottom {
+  0% {
+    transform: translateX(-60%);
+    opacity: 1;
+  }
+  100% {
+    transform: translateX(60%);
+    opacity: 0.4;
+  }
+}
+
+@keyframes star-movement-top {
+  0% {
+    transform: translateX(60%);
+    opacity: 1;
+  }
+  100% {
+    transform: translateX(-60%);
+    opacity: 0.4;
+  }
+}

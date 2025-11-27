@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Menu, X } from 'lucide-react';
+import StarBorder from './StarBorder';
 
 interface NavLink {
   name: string;
@@ -56,13 +57,17 @@ const Header: React.FC = () => {
         </nav>
 
         {/* Mobile Navigation Toggle */}
-        <button
+        <StarBorder
+          as="button"
           onClick={() => setIsMenuOpen(!isMenuOpen)}
-          className="p-2 rounded-full hover:bg-gray-800 transition-colors md:hidden"
+          className="md:hidden"
           aria-label={isMenuOpen ? 'Close menu' : 'Open menu'}
         >
-          {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
-        </button>
+          <span className="inline-flex items-center justify-center px-3 py-2">
+            {isMenuOpen ? <X size={20} /> : <Menu size={20} />}
+          </span>
+        </StarBorder>
+
       </div>
 
       {/* Mobile Menu */}

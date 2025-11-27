@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { ExternalLink, Github, Code } from 'lucide-react';
+import StarBorder from './StarBorder';
 
 interface Project {
   id: number;
@@ -142,7 +143,7 @@ const ProjectsSection: React.FC = () => {
             >
               Featured
             </button>
-            {uniqueTags.slice(0, 6).map((tag, i) => (
+            {uniqueTags.slice(0, 6).map((tag) => (
               <motion.button
                 key={tag}
                 onClick={() => setFilter(tag)}
@@ -236,24 +237,28 @@ const ProjectsSection: React.FC = () => {
           {filteredProjects.length === 0 && (
             <div className="text-center py-12">
               <p className="text-gray-400 text-lg">No projects found with the selected filter.</p>
-              <button
+              <StarBorder
+                as="button"
                 onClick={() => setFilter('all')}
-                className="mt-4 px-6 py-2 bg-red-400 text-black rounded-md transition-all hover:bg-red-500"
+                className="mt-4"
               >
                 Show All Projects
-              </button>
+              </StarBorder>
             </div>
           )}
           <div className="text-center mt-12">
-            <a
+            <StarBorder
+              as="a"
               href="https://github.com/Ukendiran-M"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center px-6 py-3 bg-transparent border border-red-400 text-red-400 hover:bg-red-400/10 font-medium rounded-md transition-all"
+              className="inline-flex items-center justify-center"
             >
-              <Code size={20} className="mr-2" />
-              See More on GitHub
-            </a>
+              <span className="inline-flex items-center">
+                <Code size={20} className="mr-2" />
+                See More on GitHub
+              </span>
+            </StarBorder>
           </div>
         </motion.div>
       </div>

@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Send, Mail, MapPin, Phone } from 'lucide-react';
+import StarBorder from './StarBorder';
 
 interface FormData {
   name: string;
@@ -199,27 +200,32 @@ const ContactSection: React.FC = () => {
                     placeholder="Your message"
                   ></textarea>
                 </motion.div>
-                <motion.button
+                <StarBorder
+                  as={motion.button}
                   onClick={handleSubmit}
                   disabled={loading}
-                  className={`w-full py-3 px-6 bg-red-500 hover:bg-red-400 text-black font-medium rounded-md transition-all flex items-center justify-center ${
-                    loading ? 'opacity-70 cursor-not-allowed' : ''
-                  }`}
+                  className="w-full"
                   whileTap={{ scale: 0.98 }}
                   initial={{ opacity: 0, y: 10 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ delay: 0.7 }}
                 >
-                  {loading ? (
-                    <span className="animate-pulse">Sending...</span>
-                  ) : (
-                    <>
-                      <Send size={18} className="mr-2" />
-                      Send Message
-                    </>
-                  )}
-                </motion.button>
+                  <span
+                    className={`flex items-center justify-center font-medium ${
+                      loading ? 'opacity-70 cursor-not-allowed' : ''
+                    }`}
+                  >
+                    {loading ? (
+                      <span className="animate-pulse">Sending...</span>
+                    ) : (
+                      <>
+                        <Send size={18} className="mr-2" />
+                        Send Message
+                      </>
+                    )}
+                  </span>
+                </StarBorder>
               </div>
             </motion.div>
           </motion.div>

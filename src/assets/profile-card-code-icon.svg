@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" shape-rendering="crispEdges">
+  <rect width="128" height="128" fill="black" fill-opacity="0"/>
+  <g fill="white" font-family="'Courier New', monospace" font-weight="700">
+    <!-- top row -->
+    <text x="14" y="26" font-size="18">&lt;/&gt;</text>
+    <text x="78" y="22" font-size="16">&lt;/&gt;</text>
+    <!-- middle -->
+    <text x="8" y="70" font-size="17">&lt;/&gt;</text>
+    <text x="64" y="78" font-size="19">&lt;/&gt;</text>
+    <!-- bottom row -->
+    <text x="28" y="112" font-size="16">&lt;/&gt;</text>
+    <text x="94" y="104" font-size="18">&lt;/&gt;</text>
+  </g>
+</svg>

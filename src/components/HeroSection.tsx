@@ -2,10 +2,14 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { ArrowDown, Github, Linkedin, Mail, FileText } from 'lucide-react';
 import profilePic from '../assets/Profile.png';
+import codeIcon from '../assets/profile-card-code-icon.svg';
+
 import LiquidEther from './LiquidEther';
 import DecryptedText from './DecryptedText';
 import FallingText from './FallingText';
 import Shuffle from './Shuffle';
+import ProfileCard from './ProfileCard';
+import StarBorder from './StarBorder';
 
 const heroText = "Design. Build. Disrupt.";
 const HeroSection: React.FC = () => {
@@ -20,7 +24,7 @@ const HeroSection: React.FC = () => {
         <LiquidEther
           colors={[ '#5227FF', '#FF9FFC', '#B19EEF' ]}
           mouseForce={20}
-          cursorSize={100}
+          cursorSize={100} 
           isViscous={false}
           viscous={30}
           iterationsViscous={32}
@@ -96,18 +100,12 @@ const HeroSection: React.FC = () => {
             <div
               className="flex flex-wrap gap-4 mb-10 justify-center md:justify-start"
             >
-              <a 
-                href="#contact"
-                className="px-6 py-3 bg-red-600 hover:bg-red-700 text-white font-medium rounded-md transition-all transform hover:scale-105"
-              >
+              <StarBorder as="a" href="#contact">
                 Contact Me
-              </a>
-              <a 
-                href="#projects" 
-                className="px-6 py-3 bg-transparent border border-red-600 text-red-500 hover:bg-red-600/10 font-medium rounded-md transition-all transform hover:scale-105"
-              >
+              </StarBorder>
+              <StarBorder as="a" href="#projects">
                 View Projects
-              </a>
+              </StarBorder>
             </div>
             <div
               className="flex space-x-6 justify-center md:justify-start"
@@ -130,15 +128,19 @@ const HeroSection: React.FC = () => {
             className="relative group w-full md:w-1/3 mb-10 md:mb-0 flex justify-center"
           >
             <div className="relative max-w-xs sm:max-w-sm mx-auto">
-              {/* Profile image with overlay */}
-              <div
-                className="relative z-10 rounded-lg overflow-hidden"
-              >
-                <img 
-                  src={profilePic} alt="My Profile" 
-                  className="w-full h-auto opacity-65"
-                />
-              </div>
+              <ProfileCard
+                avatarUrl={profilePic}
+                miniAvatarUrl={profilePic}
+                name="Ukendiran M"
+                title="Software Engineer"
+                handle="ukendiran"
+                status="Online"
+                contactText="Contact Me"
+                showUserInfo={false}
+                enableTilt={true}
+                enableMobileTilt={false}
+                iconUrl={codeIcon}
+              />
             </div>
           </div>
         </div>

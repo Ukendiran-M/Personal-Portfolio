@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Calendar, MapPin } from 'lucide-react';
+import StarBorder from './StarBorder';
 
 interface Experience {
   id: number;
@@ -74,19 +75,18 @@ const ExperienceSection: React.FC = () => {
             {/* Tabs */}
             <motion.div className="md:w-1/4 mb-6 md:mb-0" initial={{ opacity: 0, x: -20 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ delay: 0.3 }}>
               {experiences.map((exp, index) => (
-                <motion.button
+                <StarBorder
+                  as={motion.button}
                   key={exp.id}
                   onClick={() => setActiveTab(index)}
-                  className={`w-full text-left px-4 py-3 mb-2 border-l-2 transition-all ${
-                    activeTab === index
-                      ? 'border-red-400 text-red-400 bg-red-400/10'
-                      : 'border-gray-700 text-gray-400 hover:text-white hover:border-gray-400'
+                  className={`w-full text-left mb-2 ${
+                    activeTab === index ? 'opacity-100' : 'opacity-60 hover:opacity-100'
                   }`}
                   whileHover={{ scale: 1.06, backgroundColor: '#f8717122' }}
                   transition={{ type: 'spring', stiffness: 400 }}
                 >
                   {exp.company}
-                </motion.button>
+                </StarBorder>
               ))}
             </motion.div>
             {/* Content */}

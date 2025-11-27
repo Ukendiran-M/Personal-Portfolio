@@ -84,18 +84,17 @@ const SkillsSection: React.FC = () => {
                 <motion.div
                   key={index}
                   className={`bg-black dark:bg-gray-900 p-6 rounded-lg border transition-all duration-300 ease-out ${
-                    isHovered ? 'border-red-400/60 shadow-lg' : 'border-red-800/30'
+                    isHovered
+                      ? 'border-red-400/60 shadow-[0_4px_20px_-5px_rgba(239,68,68,0.35)]'
+                      : 'border-red-800/30 shadow-none'
                   }`}
                   onMouseEnter={() => setHoveredCategory(index)}
                   onMouseLeave={() => setHoveredCategory(null)}
-                  style={{
-                    boxShadow: isHovered ? '0 4px 20px -5px rgba(239, 68, 68, 0.15)' : 'none'
-                  }}
                   initial={{ opacity: 0, y: 40 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ delay: 0.1 + index * 0.08, duration: 0.6, type: 'spring' }}
-                  whileHover={{ scale: 1.03, boxShadow: '0 0 30px #f87171' }}
+                  whileHover={{ scale: 1.03 }}
                 >
                   <div className="flex items-center mb-6">
                     <motion.div
