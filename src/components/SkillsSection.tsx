@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { motion } from 'framer-motion';
 import { Layout, Database, Terminal, Server } from 'lucide-react';
 
 interface Skill {
@@ -53,18 +54,35 @@ const SkillsSection: React.FC = () => {
     <section id="skills" className="py-24 bg-gray-950 dark:bg-black text-white">
       <div className="container mx-auto px-4">
         <div className="max-w-5xl mx-auto">
-          <h2 className="text-3xl md:text-4xl font-bold mb-2">
+          <motion.h2
+            className="text-3xl md:text-4xl font-bold mb-2"
+            initial={{ opacity: 0, x: -40 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true, amount: 0.8 }}
+            transition={{ delay: 0.1, type: 'spring' }}
+          >
             <span className="text-red-400">02.</span> Skills & Expertise
-          </h2>
-          <div className="w-24 h-1 bg-red-400 mb-12"></div>
-          
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
+          </motion.h2>
+          <motion.div
+            className="w-24 h-1 bg-gradient-to-r from-red-400 via-pink-500 to-purple-500 rounded-full mb-12"
+            initial={{ scaleX: 0 }}
+            whileInView={{ scaleX: 1 }}
+            viewport={{ once: true, amount: 0.8 }}
+            transition={{ delay: 0.3, duration: 0.7, type: 'spring' }}
+            style={{ originX: 0 }}
+          />
+          <motion.div
+            className="grid grid-cols-1 md:grid-cols-2 gap-12"
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.4 }}
+            transition={{ delay: 0.2, duration: 0.7, type: 'spring' }}
+          >
             {skillCategories.map((category, index) => {
               const isHovered = hoveredCategory === index;
-              
               return (
-                <div 
-                  key={index} 
+                <motion.div
+                  key={index}
                   className={`bg-black dark:bg-gray-900 p-6 rounded-lg border transition-all duration-300 ease-out ${
                     isHovered ? 'border-red-400/60 shadow-lg' : 'border-red-800/30'
                   }`}
@@ -73,37 +91,50 @@ const SkillsSection: React.FC = () => {
                   style={{
                     boxShadow: isHovered ? '0 4px 20px -5px rgba(239, 68, 68, 0.15)' : 'none'
                   }}
+                  initial={{ opacity: 0, y: 40 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: 0.1 + index * 0.08, duration: 0.6, type: 'spring' }}
+                  whileHover={{ scale: 1.03, boxShadow: '0 0 30px #f87171' }}
                 >
                   <div className="flex items-center mb-6">
-                    <div className={`transition-transform duration-300 ${isHovered ? 'transform translate-x-1' : ''}`}>
+                    <motion.div
+                      className={`transition-transform duration-300 ${isHovered ? 'transform translate-x-1' : ''}`}
+                      whileHover={{ scale: 1.2, rotate: 8 }}
+                      transition={{ type: 'spring' }}
+                    >
                       {category.icon}
-                    </div>
+                    </motion.div>
                     <h3 className="ml-3 text-xl font-semibold text-red-400">{category.name}</h3>
                   </div>
-                  
                   <div className="space-y-6">
                     {category.skills.map((skill, skillIndex) => (
-                      <div key={skillIndex} className="transition-all duration-300 ease-out">
+                      <motion.div
+                        key={skillIndex}
+                        className="transition-all duration-300 ease-out"
+                        initial={{ opacity: 0, x: -20 }}
+                        whileInView={{ opacity: 1, x: 0 }}
+                        viewport={{ once: true }}
+                        transition={{ delay: 0.2 + skillIndex * 0.06 }}
+                      >
                         <div className="flex justify-between mb-2">
                           <span>{skill.name}</span>
                           <span className="text-white-400">{skill.level}%</span>
                         </div>
                         <div className="w-full h-2 bg-gray-800 rounded-full overflow-hidden">
-                          <div 
+                          <motion.div
                             className="h-full bg-gradient-to-r from-red-400 to-red-500 rounded-full transition-all duration-700 ease-out"
-                            style={{
-                              width: isHovered ? `${skill.level}%` : '0%',
-                              transitionDelay: `${skillIndex * 0.1}s`
-                            }}
-                          ></div>
+                            animate={{ width: isHovered ? `${skill.level}%` : '0%' }}
+                            transition={{ delay: skillIndex * 0.1, duration: 0.7, type: 'spring' }}
+                          />
                         </div>
-                      </div>
+                      </motion.div>
                     ))}
                   </div>
-                </div>
+                </motion.div>
               );
             })}
-          </div>
+          </motion.div>
         </div>
       </div>
     </section>

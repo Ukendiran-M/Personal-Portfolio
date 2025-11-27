@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { motion } from 'framer-motion';
 import { ExternalLink, Github, Code } from 'lucide-react';
 
 interface Project {
@@ -89,19 +90,43 @@ const ProjectsSection: React.FC = () => {
   return (
     <section id="projects" className="py-24 bg-black dark:bg-gray-950 text-white">
       <div className="container mx-auto px-4">
-        <div className="max-w-5xl mx-auto">
-          <h2 className="text-3xl md:text-4xl font-bold mb-2">
+        <motion.div
+          className="max-w-5xl mx-auto"
+          initial={{ opacity: 0, y: 40 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.4 }}
+          transition={{ duration: 0.7, type: 'spring' }}
+        >
+          <motion.h2
+            className="text-3xl md:text-4xl font-bold mb-2 flex items-center"
+            initial={{ opacity: 0, x: -40 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true, amount: 0.8 }}
+            transition={{ delay: 0.1, type: 'spring' }}
+          >
             <span className="text-red-400">03.</span> Projects
-          </h2>
-          <div className="w-24 h-1 bg-red-400 mb-12"></div>
-          
+          </motion.h2>
+          <motion.div
+            className="w-24 h-1 bg-gradient-to-r from-red-400 via-pink-500 to-purple-500 rounded-full mb-12"
+            initial={{ scaleX: 0 }}
+            whileInView={{ scaleX: 1 }}
+            viewport={{ once: true, amount: 0.8 }}
+            transition={{ delay: 0.3, duration: 0.7, type: 'spring' }}
+            style={{ originX: 0 }}
+          />
           {/* Filter Buttons */}
-          <div className="flex flex-wrap justify-center mb-12 gap-2">
+          <motion.div
+            className="flex flex-wrap justify-center mb-12 gap-2"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.4, duration: 0.5, type: 'spring' }}
+          >
             <button
               onClick={() => setFilter('all')}
               className={`px-4 py-2 rounded-md transition-all ${
-                filter === 'all' 
-                  ? 'bg-red-400 text-black' 
+                filter === 'all'
+                  ? 'bg-red-400 text-black'
                   : 'bg-gray-800 text-white hover:bg-gray-700'
               }`}
             >
@@ -110,61 +135,82 @@ const ProjectsSection: React.FC = () => {
             <button
               onClick={() => setFilter('featured')}
               className={`px-4 py-2 rounded-md transition-all ${
-                filter === 'featured' 
-                  ? 'bg-red-400 text-black' 
+                filter === 'featured'
+                  ? 'bg-red-400 text-black'
                   : 'bg-gray-800 text-white hover:bg-gray-700'
               }`}
             >
               Featured
             </button>
-            {uniqueTags.slice(0, 6).map((tag) => (
-              <button
+            {uniqueTags.slice(0, 6).map((tag, i) => (
+              <motion.button
                 key={tag}
                 onClick={() => setFilter(tag)}
                 className={`px-4 py-2 rounded-md transition-all ${
-                  filter === tag 
-                    ? 'bg-red-400 text-black' 
+                  filter === tag
+                    ? 'bg-red-400 text-black'
                     : 'bg-gray-800 text-white hover:bg-gray-700'
                 }`}
+                whileHover={{ scale: 1.12 }}
+                whileTap={{ scale: 0.97 }}
+                transition={{ type: 'spring', stiffness: 400 }}
               >
                 {tag}
-              </button>
+              </motion.button>
             ))}
-          </div>
-          
+          </motion.div>
           {/* Projects Grid */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {filteredProjects.map((project) => (
-              <div 
-                key={project.id} 
-                className="bg -gray-900 dark:bg-black rounded-lg overflow-hidden border border-gray-800 group hover:border-red-400/50 transition-all duration-300 hover:shadow-[0_0_15px_rgba(20,184,166,0.15)]"
+          <motion.div
+            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.6, duration: 0.5, type: 'spring' }}
+          >
+            {filteredProjects.map((project, idx) => (
+              <motion.div
+                key={project.id}
+                className="bg-gray-900 dark:bg-black rounded-lg overflow-hidden border border-gray-800 group hover:border-red-400/50 transition-all duration-300 hover:shadow-[0_0_15px_rgba(20,184,166,0.15)]"
+                initial={{ opacity: 0, y: 40 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: 0.1 + idx * 0.08, duration: 0.6, type: 'spring' }}
+                whileHover={{ scale: 1.03, boxShadow: '0 0 30px #f87171' }}
               >
                 <div className="relative overflow-hidden h-48">
-                  <img 
-                    src={project.image} 
-                    alt={project.title} 
+                  <motion.img
+                    src={project.image}
+                    alt={project.title}
                     className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                    initial={{ scale: 1 }}
+                    whileHover={{ scale: 1.08 }}
+                    transition={{ type: 'spring', stiffness: 300 }}
                   />
-                  <div className="absolute inset-0 bg-black bg-opacity-50 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+                  <motion.div
+                    className="absolute inset-0 bg-black bg-opacity-50 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center"
+                    initial={{ opacity: 0 }}
+                    whileHover={{ opacity: 1 }}
+                    transition={{ duration: 0.3 }}
+                  >
                     <div className="flex space-x-4">
-                      <a 
-                        href={project.github} 
-                        target="_blank" 
+                      <a
+                        href={project.github}
+                        target="_blank"
                         rel="noopener noreferrer"
                         className="bg-black bg-opacity-70 p-2 rounded-full transform transition-transform duration-300 hover:scale-110"
                       >
                         <Github size={20} className="text-white" />
                       </a>
-                      <a 
-                        href={project.demo} 
-                        target="_blank" 
+                      <a
+                        href={project.demo}
+                        target="_blank"
                         rel="noopener noreferrer"
                         className="bg-black bg-opacity-70 p-2 rounded-full transform transition-transform duration-300 hover:scale-110"
                       >
                         <ExternalLink size={20} className="text-white" />
                       </a>
                     </div>
-                  </div>
+                  </motion.div>
                 </div>
                 <div className="p-6">
                   <h3 className="text-xl font-semibold mb-2 group-hover:text-red-400 transition-colors">
@@ -175,8 +221,8 @@ const ProjectsSection: React.FC = () => {
                   </p>
                   <div className="flex flex-wrap gap-2">
                     {project.tags.map((tag, index) => (
-                      <span 
-                        key={index} 
+                      <span
+                        key={index}
                         className="text-xs px-2 py-1 rounded-md bg-black-200 border border-red-400 text-red-400"
                       >
                         {tag}
@@ -184,10 +230,9 @@ const ProjectsSection: React.FC = () => {
                     ))}
                   </div>
                 </div>
-              </div>
+              </motion.div>
             ))}
-          </div>
-          
+          </motion.div>
           {filteredProjects.length === 0 && (
             <div className="text-center py-12">
               <p className="text-gray-400 text-lg">No projects found with the selected filter.</p>
@@ -199,11 +244,10 @@ const ProjectsSection: React.FC = () => {
               </button>
             </div>
           )}
-          
           <div className="text-center mt-12">
-            <a 
-              href="https://github.com/Ukendiran-M" 
-              target="_blank" 
+            <a
+              href="https://github.com/Ukendiran-M"
+              target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center px-6 py-3 bg-transparent border border-red-400 text-red-400 hover:bg-red-400/10 font-medium rounded-md transition-all"
             >
@@ -211,7 +255,7 @@ const ProjectsSection: React.FC = () => {
               See More on GitHub
             </a>
           </div>
-        </div>
+        </motion.div>
       </div>
     </section>
   );

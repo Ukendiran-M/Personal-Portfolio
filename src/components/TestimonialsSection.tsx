@@ -1,4 +1,5 @@
 import React from 'react';
+import { motion } from 'framer-motion';
 import { Quote } from 'lucide-react';
 import testPic from '../assets/Alfonso.jpeg';
 
@@ -43,23 +44,44 @@ const TestimonialsSection: React.FC = () => {
     <section id="testimonials" className="py-24 bg-black text-white">
       <div className="container mx-auto px-4">
         <div className="max-w-5xl mx-auto">
-          <h2 className="text-3xl md:text-4xl font-bold mb-2">
+          <motion.h2
+            className="text-3xl md:text-4xl font-bold mb-2"
+            initial={{ opacity: 0, x: -40 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true, amount: 0.8 }}
+            transition={{ delay: 0.1, type: 'spring' }}
+          >
             <span className="text-red-500">05.</span> Testimonials
-          </h2>
-          <div className="w-24 h-1 bg-red-500 mb-12"></div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {testimonials.map((testimonial) => (
-              <div 
+          </motion.h2>
+          <motion.div
+            className="w-24 h-1 bg-gradient-to-r from-red-500 via-pink-500 to-purple-500 rounded-full mb-12"
+            initial={{ scaleX: 0 }}
+            whileInView={{ scaleX: 1 }}
+            viewport={{ once: true, amount: 0.8 }}
+            transition={{ delay: 0.3, duration: 0.7, type: 'spring' }}
+            style={{ originX: 0 }}
+          />
+          <motion.div
+            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.4 }}
+            transition={{ delay: 0.2, duration: 0.7, type: 'spring' }}
+          >
+            {testimonials.map((testimonial, idx) => (
+              <motion.div 
                 key={testimonial.id}
                 className="bg-gray-900 rounded-lg p-6 border border-gray-800 hover:border-red-500/50 transition-all duration-300"
+                initial={{ opacity: 0, y: 40 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: 0.1 + idx * 0.08, duration: 0.6, type: 'spring' }}
+                whileHover={{ scale: 1.03, boxShadow: '0 0 30px #f87171' }}
               >
                 <Quote className="text-red-500 mb-4" size={32} />
-                
                 <p className="text-gray-300 mb-6">
                   "{testimonial.content}"
                 </p>
-                
                 <div className="flex items-center">
                   <img 
                     src={testimonial.image} 
@@ -73,9 +95,9 @@ const TestimonialsSection: React.FC = () => {
                     </p>
                   </div>
                 </div>
-              </div>
+              </motion.div>
             ))}
-          </div>
+          </motion.div>
         </div>
       </div>
     </section>
