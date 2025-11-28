@@ -1,5 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
+import ScrollReveal from './ScrollReveal';
 
 const AboutSection: React.FC = () => {
   return (
@@ -36,10 +37,16 @@ const AboutSection: React.FC = () => {
             viewport={{ once: true, amount: 0.4 }}
             transition={{ delay: 0.2, duration: 0.7, type: 'spring' }}
           >
-            <motion.p className="text-gray-300 text-lg mb-6" initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.15 }}>
-              Hello there! I'm Ukendiran, a software engineer passionate about building exceptional digital experiences.
-              As a student developer at Sri Shakthi Institute of Engineering and Technology, I'm currently working as a Software Intern at Digital MadEasy, London.
-            </motion.p>
+            <ScrollReveal
+              baseOpacity={0}
+              enableBlur={true}
+              baseRotation={5}
+              blurStrength={10}
+              containerClassName="mb-6"
+              textClassName="text-gray-300 text-lg"
+            >
+              Hello there! I'm Ukendiran, a software engineer passionate about building exceptional digital experiences. As a student developer at Sri Shakthi Institute of Engineering and Technology, I'm currently working as a Software Intern at Digital MadEasy, London.
+            </ScrollReveal>
             <motion.p className="text-gray-300 text-lg mb-6" initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.25 }}>
               Fast-forward to today, My main focus these days is Learning more technologies as possible and building accessible, inclusive products 
               and digital experiences for a variety of clients.
