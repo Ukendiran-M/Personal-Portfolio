@@ -89,7 +89,7 @@ const ProjectsSection: React.FC = () => {
   const uniqueTags = Array.from(new Set(projects.flatMap(project => project.tags)));
 
   return (
-    <section id="projects" className="py-24 bg-black dark:bg-gray-950 text-white">
+    <section id="projects" className="min-h-screen flex items-center py-24 bg-black dark:bg-gray-950 text-white">
       <div className="container mx-auto px-4">
         <motion.div
           className="max-w-5xl mx-auto"

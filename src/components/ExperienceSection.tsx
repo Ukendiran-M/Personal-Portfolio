@@ -45,7 +45,7 @@ const ExperienceSection: React.FC = () => {
   const [activeTab, setActiveTab] = useState<number>(0);
   
   return (
-    <section id="experience" className="py-24 bg-gray-950 dark:bg-black text-white">
+    <section id="experience" className="min-h-screen flex items-center py-24 bg-gray-950 dark:bg-black text-white">
       <div className="container mx-auto px-4">
         <div className="max-w-5xl mx-auto">
           <motion.h2

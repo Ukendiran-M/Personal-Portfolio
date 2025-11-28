@@ -138,7 +138,7 @@ const HeroSection: React.FC = () => {
                 contactText="Contact Me"
                 showUserInfo={false}
                 enableTilt={true}
-                enableMobileTilt={false}
+                enableMobileTilt={true}
                 iconUrl={codeIcon}
               />
             </div>

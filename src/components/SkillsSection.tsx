@@ -8,8 +8,13 @@ interface Skill {
   category: string;
 }
 
+interface SkillCategory {
+  name: string;
+  icon: React.ReactNode;
+  skills: Skill[];
+}
 
-const skillCategories = [
+const skillCategories: SkillCategory[] = [
   {
     name: 'Frontend',
     icon: <Layout className="w-6 h-6 text-teal-400" />,
@@ -51,7 +56,7 @@ const SkillsSection: React.FC = () => {
   const [hoveredCategory, setHoveredCategory] = useState<number | null>(null);
 
   return (
-    <section id="skills" className="py-24 bg-gray-950 dark:bg-black text-white">
+    <section id="skills" className="min-h-screen flex items-center py-24 bg-gray-950 dark:bg-black text-white">
       <div className="container mx-auto px-4">
         <div className="max-w-5xl mx-auto">
           <motion.h2
