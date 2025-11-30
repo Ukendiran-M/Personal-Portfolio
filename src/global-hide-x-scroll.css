@@ -1,0 +1,19 @@
+/* Hide all horizontal scrollbars globally */
+#root {
+  overflow-x: hidden !important;
+}
+/* Hide horizontal scrollbars visually for webkit browsers */
+::-webkit-scrollbar:horizontal {
+  display: none !important;
+  height: 0 !important;
+}
+
+/* Hide any webkit-based scrollbars (for Chrome, Edge, Safari) */
+::-webkit-scrollbar:horizontal {
+  display: none !important;
+  height: 0 !important;
+}
+/* Hide scrollbars for CardSwap container if needed */
+.CardSwap-no-x-scroll {
+  overflow-x: hidden !important;
+}

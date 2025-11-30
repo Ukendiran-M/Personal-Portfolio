@@ -48,8 +48,8 @@ interface Slot {
 
 const makeSlot = (i: number, distX: number, distY: number, total: number): Slot => ({
   x: 0,
-  y: 0,
-  z: i * -80, // space cards apart in Z
+  y: 20,
+  z: i * -120, // increased Z offset for better visibility
   zIndex: total - i
 });
 
@@ -68,7 +68,7 @@ const placeNow = (el: HTMLElement, slot: Slot, _skew: number) =>
 const CardSwap: React.FC<CardSwapProps> = ({
   width = 500,
   height = 400,
-  cardDistance = 60,
+  cardDistance = 20,
   verticalDistance = 70,
   delay = 5000,
   pauseOnHover = false,
@@ -208,7 +208,7 @@ const CardSwap: React.FC<CardSwapProps> = ({
   return (
     <div
       ref={container}
-      className="relative mx-auto flex justify-center items-center w-full h-full overflow-visible"
+      className="relative mx-auto flex justify-center items-center w-full h-full overflow-visible overflow-y-hidden"
       style={{
         width: '100%',
         height: '100%',

@@ -7,30 +7,38 @@ export function usePinSectionOnEnter(sectionId: string, durationMs: number): boo
     const section = document.getElementById(sectionId);
     if (!section) return;
     let timeout: any;
-    let pinned = false;
-    const onScroll = () => {
-      if (pinned) return;
-      const rect = section.getBoundingClientRect();
-      const inView = rect.top <= 0 && rect.bottom > window.innerHeight / 2;
-      if (inView && !pinnedRef.current) {
-        pinned = true;
-        pinnedRef.current = true;
-        setIsPinned(true);
-        document.body.style.overflow = 'hidden';
-        window.scrollTo({ top: section.offsetTop, behavior: 'smooth' });
-        timeout = setTimeout(() => {
-          document.body.style.overflow = '';
+    let observer: IntersectionObserver | null = null;
+    function pinSection() {
+      if (pinnedRef.current) return;
+      if (!section) return;
+      pinnedRef.current = true;
+      setIsPinned(true);
+      document.body.style.overflow = 'hidden';
+      window.scrollTo({ top: section.offsetTop, behavior: 'smooth' });
+      timeout = setTimeout(() => {
+        document.body.style.overflow = '';
+        pinnedRef.current = false;
+        setIsPinned(false);
+      }, durationMs);
+    }
+    observer = new IntersectionObserver(
+      entries => {
+        if (entries[0].intersectionRatio >= 0.8 && !pinnedRef.current) {
+          pinSection();
+        }
+        if (entries[0].intersectionRatio < 0.8) {
           pinnedRef.current = false;
-          setIsPinned(false);
-        }, durationMs);
-      }
-    };
-    window.addEventListener('scroll', onScroll, { passive: true });
+        }
+      },
+      { threshold: 0.8, rootMargin: '0px' }
+    );
+    observer.observe(section);
     return () => {
-      window.removeEventListener('scroll', onScroll);
+      observer && observer.disconnect();
       clearTimeout(timeout);
       document.body.style.overflow = '';
     };
   }, [sectionId, durationMs]);
   return isPinned;
 }
+

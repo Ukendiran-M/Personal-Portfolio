@@ -1,4 +1,5 @@
 import React from 'react';
+import './global-hide-x-scroll.css';
 import Header from './components/Header';
 import HeroSection from './components/HeroSection';
 import AboutSection from './components/AboutSection';
