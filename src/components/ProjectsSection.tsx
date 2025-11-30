@@ -1,7 +1,6 @@
-import React, { useState } from 'react';
-import { motion } from 'framer-motion';
-import { ExternalLink, Github, Code } from 'lucide-react';
-import StarBorder from './StarBorder';
+import React from 'react';
+import CardSwap, { Card } from './CardSwap';
+import { usePinSectionOnEnter } from './usePinSectionOnEnter';
 
 interface Project {
   id: number;
@@ -78,189 +77,94 @@ const projects: Project[] = [
 ];
 
 const ProjectsSection: React.FC = () => {
-  const [filter, setFilter] = useState<string>('all');
-  
-  const filteredProjects = filter === 'all' 
-    ? projects 
-    : filter === 'featured' 
-      ? projects.filter(project => project.featured)
-      : projects.filter(project => project.tags.includes(filter));
-  
-  const uniqueTags = Array.from(new Set(projects.flatMap(project => project.tags)));
+  const isPinned = usePinSectionOnEnter('projects', 5000);
 
   return (
     <section id="projects" className="min-h-screen flex items-center py-24 bg-black dark:bg-gray-950 text-white">
       <div className="container mx-auto px-4">
-        <motion.div
-          className="max-w-5xl mx-auto"
-          initial={{ opacity: 0, y: 40 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.4 }}
-          transition={{ duration: 0.7, type: 'spring' }}
-        >
-          <motion.h2
-            className="text-3xl md:text-4xl font-bold mb-2 flex items-center"
-            initial={{ opacity: 0, x: -40 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true, amount: 0.8 }}
-            transition={{ delay: 0.1, type: 'spring' }}
-          >
+        <div className="max-w-5xl mx-auto">
+          <h2 className="text-3xl md:text-4xl font-bold mb-2 flex items-center">
             <span className="text-red-400">03.</span> Projects
-          </motion.h2>
-          <motion.div
-            className="w-24 h-1 bg-gradient-to-r from-red-400 via-pink-500 to-purple-500 rounded-full mb-12"
-            initial={{ scaleX: 0 }}
-            whileInView={{ scaleX: 1 }}
-            viewport={{ once: true, amount: 0.8 }}
-            transition={{ delay: 0.3, duration: 0.7, type: 'spring' }}
-            style={{ originX: 0 }}
-          />
-          {/* Filter Buttons */}
-          <motion.div
-            className="flex flex-wrap justify-center mb-12 gap-2"
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.4, duration: 0.5, type: 'spring' }}
-          >
-            <button
-              onClick={() => setFilter('all')}
-              className={`px-4 py-2 rounded-md transition-all ${
-                filter === 'all'
-                  ? 'bg-red-400 text-black'
-                  : 'bg-gray-800 text-white hover:bg-gray-700'
-              }`}
-            >
-              All
-            </button>
-            <button
-              onClick={() => setFilter('featured')}
-              className={`px-4 py-2 rounded-md transition-all ${
-                filter === 'featured'
-                  ? 'bg-red-400 text-black'
-                  : 'bg-gray-800 text-white hover:bg-gray-700'
-              }`}
-            >
-              Featured
-            </button>
-            {uniqueTags.slice(0, 6).map((tag) => (
-              <motion.button
-                key={tag}
-                onClick={() => setFilter(tag)}
-                className={`px-4 py-2 rounded-md transition-all ${
-                  filter === tag
-                    ? 'bg-red-400 text-black'
-                    : 'bg-gray-800 text-white hover:bg-gray-700'
-                }`}
-                whileHover={{ scale: 1.12 }}
-                whileTap={{ scale: 0.97 }}
-                transition={{ type: 'spring', stiffness: 400 }}
-              >
-                {tag}
-              </motion.button>
-            ))}
-          </motion.div>
-          {/* Projects Grid */}
-          <motion.div
-            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.6, duration: 0.5, type: 'spring' }}
-          >
-            {filteredProjects.map((project, idx) => (
-              <motion.div
-                key={project.id}
-                className="bg-gray-900 dark:bg-black rounded-lg overflow-hidden border border-gray-800 group hover:border-red-400/50 transition-all duration-300 hover:shadow-[0_0_15px_rgba(20,184,166,0.15)]"
-                initial={{ opacity: 0, y: 40 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: 0.1 + idx * 0.08, duration: 0.6, type: 'spring' }}
-                whileHover={{ scale: 1.03, boxShadow: '0 0 30px #f87171' }}
-              >
-                <div className="relative overflow-hidden h-48">
-                  <motion.img
-                    src={project.image}
-                    alt={project.title}
-                    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
-                    initial={{ scale: 1 }}
-                    whileHover={{ scale: 1.08 }}
-                    transition={{ type: 'spring', stiffness: 300 }}
-                  />
-                  <motion.div
-                    className="absolute inset-0 bg-black bg-opacity-50 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center"
-                    initial={{ opacity: 0 }}
-                    whileHover={{ opacity: 1 }}
-                    transition={{ duration: 0.3 }}
-                  >
-                    <div className="flex space-x-4">
-                      <a
-                        href={project.github}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="bg-black bg-opacity-70 p-2 rounded-full transform transition-transform duration-300 hover:scale-110"
-                      >
-                        <Github size={20} className="text-white" />
-                      </a>
-                      <a
-                        href={project.demo}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="bg-black bg-opacity-70 p-2 rounded-full transform transition-transform duration-300 hover:scale-110"
-                      >
-                        <ExternalLink size={20} className="text-white" />
-                      </a>
+          </h2>
+          <div className="w-24 h-1 bg-gradient-to-r from-red-400 via-pink-500 to-purple-500 rounded-full mb-12" />
+          <div className="w-full max-w-5xl mx-auto" style={{ height: '600px', position: 'relative' }}>
+            {isPinned && (
+              <div className="pointer-events-none absolute inset-0 flex items-end justify-center pb-6 md:pb-8 z-20">
+                <div className="flex items-center gap-3 text-xs md:text-base tracking-[0.16em] uppercase text-white/75 bg-black/60 rounded-full px-6 py-2 shadow-lg animate-pulse">
+                  <svg className="animate-spin w-5 h-5 text-red-400" fill="none" viewBox="0 0 24 24">
+                    <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                    <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v4a4 4 0 00-4 4H4z"></path>
+                  </svg>
+                  <span className="whitespace-nowrap">Auto-swapping cards: Project Showcase</span>
+                </div>
+              </div>
+            )}
+            <CardSwap cardDistance={60} verticalDistance={70} delay={5000} pauseOnHover={false} width="100%">
+              {projects.map((project) => (
+                <Card key={project.id} className="w-full max-w-5xl h-[26rem] md:h-[27.5rem] bg-gradient-to-br from-gray-900/90 to-black/80 shadow-2xl border border-red-500/30 overflow-hidden">
+                  <div className="relative grid grid-cols-1 md:grid-cols-2 h-full w-full">
+                    {/* Left: Image + Tags */}
+                    <div className="relative h-52 md:h-full flex flex-col justify-between">
+                      <div className="relative h-52 md:h-full">
+                        <img
+                          src={project.image}
+                          alt={project.title}
+                          className="w-full h-full object-cover object-center rounded-none md:rounded-l-2xl"
+                        />
+                        <div className="absolute top-3 left-3 flex flex-wrap gap-2 z-10">
+                          {project.tags.map((tag, i) => (
+                            <span
+                              key={i}
+                              className="backdrop-blur-md bg-black/40 px-3 py-1 rounded-full text-xs font-bold text-white border border-pink-400/40 shadow-sm uppercase tracking-wide"
+                            >
+                              {tag}
+                            </span>
+                          ))}
+                        </div>
+                        <div className="absolute bottom-3 left-3 bg-red-500/90 text-white text-xs px-3 py-1 rounded-full shadow font-bold tracking-widest uppercase">
+                          {project.featured ? 'Featured' : 'Project'}
+                        </div>
+                        <div className="absolute inset-0 bg-gradient-to-br from-black/60 to-transparent pointer-events-none rounded-none md:rounded-l-2xl" />
+                      </div>
                     </div>
-                  </motion.div>
-                </div>
-                <div className="p-6">
-                  <h3 className="text-xl font-semibold mb-2 group-hover:text-red-400 transition-colors">
-                    {project.title}
-                  </h3>
-                  <p className="text-gray-400 mb-4 line-clamp-3">
-                    {project.description}
-                  </p>
-                  <div className="flex flex-wrap gap-2">
-                    {project.tags.map((tag, index) => (
-                      <span
-                        key={index}
-                        className="text-xs px-2 py-1 rounded-md bg-black-200 border border-red-400 text-red-400"
-                      >
-                        {tag}
-                      </span>
-                    ))}
+                    {/* Right: Content */}
+                    <div className="flex flex-col justify-between h-full px-8 py-7 bg-white/10 backdrop-blur-lg rounded-none md:rounded-r-2xl border-l border-white/10">
+                      <div>
+                        <h3 className="text-3xl font-extrabold text-white mb-3 drop-shadow-lg text-left relative inline-block">
+                          <span className="pr-2">{project.title}</span>
+                          <span className="absolute left-0 bottom-0 w-2/3 h-1 bg-gradient-to-r from-red-400 via-pink-500 to-purple-500 rounded-full opacity-60" />
+                        </h3>
+                        <p className="text-gray-200 mb-6 text-base leading-relaxed line-clamp-4 text-left">
+                          {project.description}
+                        </p>
+                      </div>
+                      <div className="flex gap-4 justify-start mt-auto">
+                        <a
+                          href={project.github}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="inline-flex items-center gap-2 bg-black/70 border border-red-400 text-red-300 px-5 py-2 rounded-lg font-semibold hover:bg-red-500/80 hover:text-white hover:border-red-500 shadow transition-all duration-200"
+                        >
+                          <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C6.477 2 2 6.484 2 12.021c0 4.425 2.865 8.176 6.839 9.504.5.092.682-.217.682-.482 0-.238-.009-.868-.014-1.703-2.782.605-3.369-1.342-3.369-1.342-.454-1.154-1.11-1.462-1.11-1.462-.908-.62.069-.608.069-.608 1.004.07 1.532 1.032 1.532 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.339-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.987 1.029-2.686-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.025A9.563 9.563 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.295 2.747-1.025 2.747-1.025.546 1.378.203 2.397.1 2.65.64.699 1.028 1.593 1.028 2.686 0 3.847-2.338 4.695-4.566 4.944.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.749 0 .267.18.577.688.479C19.138 20.193 22 16.442 22 12.021 22 6.484 17.523 2 12 2z"/></svg>
+                          GitHub
+                        </a>
+                        <a
+                          href={project.demo}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="inline-flex items-center gap-2 bg-gradient-to-r from-red-400 to-pink-500 text-white px-5 py-2 rounded-lg font-semibold border border-white/10 shadow hover:from-pink-500 hover:to-red-500 transition-all duration-200"
+                        >
+                          <svg className="w-5 h-5" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path d="M14 3h7v7m0 0L10 21l-7-7 11-11z"/></svg>
+                          Live Demo
+                        </a>
+                      </div>
+                    </div>
                   </div>
-                </div>
-              </motion.div>
-            ))}
-          </motion.div>
-          {filteredProjects.length === 0 && (
-            <div className="text-center py-12">
-              <p className="text-gray-400 text-lg">No projects found with the selected filter.</p>
-              <StarBorder
-                as="button"
-                onClick={() => setFilter('all')}
-                className="mt-4"
-              >
-                Show All Projects
-              </StarBorder>
-            </div>
-          )}
-          <div className="text-center mt-12">
-            <StarBorder
-              as="a"
-              href="https://github.com/Ukendiran-M"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center justify-center"
-            >
-              <span className="inline-flex items-center">
-                <Code size={20} className="mr-2" />
-                See More on GitHub
-              </span>
-            </StarBorder>
+                </Card>
+              ))}
+            </CardSwap>
           </div>
-        </motion.div>
+        </div>
       </div>
     </section>
   );
