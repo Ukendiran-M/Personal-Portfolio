@@ -44,7 +44,7 @@ const projects: Project[] = [
   },
   {
     id: 103,
-    title: 'Psicologa Simona Rosati',
+    title: 'Psicologa Rosati',
     description: `A welcoming, safe space for therapy and personal growth. Simona Rosati offers in-person and online psychological support for anxiety, sadness, and self-discovery, with a focus on trust, respect, and attentive listening.`,
     image: PsicologaImg,
     tags: ['Psychology', 'Therapy', 'Italy'],
@@ -109,10 +109,18 @@ const ProjectsSection: React.FC = () => {
             )}
             <CardSwap cardDistance={60} verticalDistance={70} delay={5000} pauseOnHover={false} width="100%">
               {projects.map((project) => (
-                <Card key={project.id} className="w-full max-w-5xl h-[26rem] md:h-[27.5rem] bg-gradient-to-br from-gray-900/90 to-black/80 shadow-2xl border border-red-500/30 overflow-hidden">
-                  <div className="relative grid grid-cols-1 md:grid-cols-2 h-full w-full">
+                <Card
+                  key={project.id}
+                  className="w-full min-h-[350px] md:min-h-[320px] md:w-full md:max-w-none bg-gradient-to-br from-gray-900/90 to-black/80 shadow-2xl border border-red-500/30 overflow-hidden flex flex-col cursor-pointer group mx-auto md:mx-0"
+                  onClick={() => {
+                    if (window.innerWidth < 768 && project.demo) {
+                      window.open(project.demo, '_blank');
+                    }
+                  }}
+                >
+                  <div className="relative flex flex-col md:flex-row h-full w-full gap-4 md:gap-0 items-stretch md:items-center justify-center md:justify-start">
                     {/* Left: Image + Tags */}
-                    <div className="relative h-52 md:h-full flex flex-col justify-between">
+                    <div className="relative h-52 md:h-full md:w-1/2 flex flex-col justify-between">
                       <div className="relative h-52 md:h-full">
                         <img
                           src={project.image}
@@ -136,26 +144,50 @@ const ProjectsSection: React.FC = () => {
                       </div>
                     </div>
                     {/* Right: Content */}
-                    <div className="flex flex-col justify-between h-full px-8 py-7 bg-white/10 backdrop-blur-lg rounded-none md:rounded-r-2xl border-l border-white/10">
+                    <div className="flex flex-col justify-between h-full px-4 py-5 md:px-10 md:py-7 bg-white/10 backdrop-blur-lg rounded-b-2xl md:rounded-none md:rounded-r-2xl border-t border-white/10 md:border-t-0 md:border-l md:w-1/2">
                       <div>
-                        <h3 className="text-3xl md:text-4xl font-extrabold text-white mb-3 tracking-tight leading-tight drop-shadow-lg text-left relative inline-block font-sans">
+                        <h3 className="text-2xl md:text-3xl font-extrabold text-white mb-2 tracking-tight leading-tight drop-shadow-lg text-center md:text-left relative inline-block font-sans">
                           <span className="pr-2">{project.title}</span>
                           <span className="absolute left-0 bottom-0 w-2/3 h-[3px] bg-gradient-to-r from-pink-400 to-purple-500 rounded-full opacity-80" />
                         </h3>
-                        <p className="text-base md:text-lg font-semibold text-gray-200 mb-6 leading-relaxed tracking-normal text-left font-mono">
-                          {project.description}
+                        <p className="text-xs md:text-base font-semibold text-gray-200 mb-4 leading-relaxed tracking-normal text-center md:text-left font-mono line-clamp-2 md:line-clamp-none">
+                          {/* Mobile: 2-line summary, Desktop: full description */}
+<span className="block md:hidden">
+  {(() => {
+    switch (project.title) {
+      case 'Hotel Europa':
+        return '3-star hotel in Foggia, Italy. Comfort for business and leisure.';
+      case 'Printora':
+        return 'High-quality digital printing. Fast, easy, and affordable.';
+      case 'Psicologa Simona Rosati':
+        return 'Therapy and support for personal growth. Safe, welcoming space.';
+      case 'Puerh Craft':
+        return 'Authentic Pu-erh tea, ethically sourced from Yunnan.';
+      case 'Marketing Fort':
+        return 'Digital agency focused on results and business growth.';
+      case 'Ruizhi Healthcare':
+        return 'Modern healthcare platform (under development).';
+      default:
+        return project.description.slice(0, 90) + (project.description.length > 90 ? '...' : '');
+    }
+  })()}
+</span>
+<span className="hidden md:block">{project.description}</span>
                         </p>
                       </div>
-                      <div className="flex gap-4 justify-start mt-auto">
+                      <div className="flex gap-4 justify-center md:justify-start mt-auto">
                         <a
                           href={project.demo}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="inline-flex items-center gap-2 bg-gradient-to-r from-red-400 to-pink-500 text-white px-5 py-2 rounded-lg font-semibold border border-white/10 shadow hover:from-pink-500 hover:to-red-500 transition-all duration-200"
+                          className="hidden md:inline-flex items-center gap-2 bg-gradient-to-r from-red-400 to-pink-500 text-white px-5 py-2 rounded-lg font-semibold border border-white/10 shadow hover:from-pink-500 hover:to-red-500 transition-all duration-200"
                         >
                           <svg className="w-5 h-5" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path d="M14 3h7v7m0 0L10 21l-7-7 11-11z"/></svg>
-                          Live Demo
+                          Visit website
                         </a>
+                        <span className="block md:hidden w-full text-center text-xs text-pink-400 mt-1 mb-8 font-bold tracking-wider animate-pulse select-none pointer-events-none">
+                          Tap card to view live website
+                        </span>
                       </div>
                     </div>
                   </div>

@@ -51,6 +51,8 @@ const AboutSection: React.FC = () => {
               blurStrength={16}
               containerClassName=""
               textClassName="text-gray-100 text-2xl md:text-3xl leading-relaxed font-semibold"
+              wordAnimationEnd={typeof window !== 'undefined' && window.innerWidth >= 768 && window.innerWidth < 1024 ? '+=80%' : '+=200%'}
+              rotationEnd={typeof window !== 'undefined' && window.innerWidth >= 768 && window.innerWidth < 1024 ? '+=80%' : '+=200%'}
             >
               {`I’m Ukendiran — a product-minded software engineer who designs and builds high-performance web experiences that help businesses reach measurable outcomes. I combine a user-first design approach with solid engineering practices to deliver websites and web apps that load fast, behave reliably, and convert visitors into customers.
 
