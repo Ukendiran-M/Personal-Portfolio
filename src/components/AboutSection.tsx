@@ -54,9 +54,9 @@ const AboutSection: React.FC = () => {
               wordAnimationEnd={typeof window !== 'undefined' && window.innerWidth >= 768 && window.innerWidth < 1024 ? '+=80%' : '+=200%'}
               rotationEnd={typeof window !== 'undefined' && window.innerWidth >= 768 && window.innerWidth < 1024 ? '+=80%' : '+=200%'}
             >
-              {`I’m Ukendiran — a product-minded software engineer who designs and builds high-performance web experiences that help businesses reach measurable outcomes. I combine a user-first design approach with solid engineering practices to deliver websites and web apps that load fast, behave reliably, and convert visitors into customers.
+              {`I’m Ukendiran — a product-minded software engineer who designs and builds high-performance web experiences that help businesses reach measurable outcomes. I combine a user-first design approach with solid engineering practices to deliver websites and web apps that load fast, behave reliably, and convert visitors into customers with the Digital Marketer Perspective.
 
-Currently, I’m a software intern at Digital Madeasy (London) and a student at Sri Shakthi Institute of Engineering and Technology. In every project I take on, I focus on clear communication, pragmatic solutions, and shipping work that drives business value. I care deeply about accessibility, performance, and maintainability so clients can scale their product with confidence.
+Currently, I’m currently providing my service for Digital Madeasy (London) and for few external small scale businesses. I'm a full fledged Software engineer who studied at Sri Shakthi Institute of Engineering and Technology. In every project I take on, I focus on clear communication, pragmatic solutions, and shipping work that drives business value. I care deeply about accessibility, performance, and maintainability so clients can scale their product with confidence.
 
 I work closely with founders and product teams to understand goals, translate them into actionable plans, and deliver results on time. If you’re looking for a reliable developer who treats your product like their own and prioritizes ROI, let’s connect — I’d love to learn about your project.`}
             </ScrollReveal>
