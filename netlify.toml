@@ -1,7 +1,8 @@
 # Static site: no build step, publish the repository root.
+# The command must not be empty: an empty one falls back to the old React site's "npm run build" set in the Netlify UI.
 [build]
   publish = "."
-  command = ""
+  command = "echo 'Static site: nothing to build'"
 
 [[headers]]
   for = "/*"
