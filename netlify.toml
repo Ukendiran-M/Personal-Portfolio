@@ -1,8 +1,8 @@
-# Static site: no build step, publish the repository root.
-# The command must not be empty: an empty one falls back to the old React site's "npm run build" set in the Netlify UI.
+# Static site, no real build: the build copies the site into dist/, because the Netlify project
+# (set up for the old React version) deploys dist/ whatever netlify.toml says.
 [build]
-  publish = "."
-  command = "echo 'Static site: nothing to build'"
+  publish = "dist"
+  command = "rm -rf dist && mkdir dist && cp -R index.html favicon.svg robots.txt sitemap.xml assets dist/"
 
 [[headers]]
   for = "/*"

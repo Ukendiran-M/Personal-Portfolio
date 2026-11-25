@@ -20,5 +20,5 @@ One static page, no build step:
 
 ## Deploy
 
-Netlify serves the repository root (`netlify.toml`). Preview locally with any static server, for example
+Netlify copies the site files into `dist/` and serves that (`netlify.toml`); pushing to the repo deploys. Preview locally with any static server, for example
 `python -m http.server 5077` and open <http://127.0.0.1:5077/>.
